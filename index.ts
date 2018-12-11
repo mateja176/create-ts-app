@@ -1,6 +1,6 @@
 import * as commander from "commander";
 import * as fs from "fs-extra";
-import { spawn } from "child_process";
+import { exec } from "child-process-promise";
 import chalk from "chalk";
 
 commander
@@ -29,15 +29,6 @@ fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
 
 console.log(chalk.blue("Installing node modules"));
 
-const install = spawn("npm", ["i"]);
-
-install.stderr.on("data", data => {
-  if (data.includes("error")) {
-    console.log(chalk.red(data));
-  }
-});
-
-install.on("close", () => {
-  console.log(chalk.green("Project successfully created"));
-  console.log(chalk.black.bgGreen(`cd ${name}`));
-});
+exec(`cd ${name}`)
+  .then(() => exec("npm i"))
+  .catch(({ stderr }) => console.log(chalk.red(stderr)));
