@@ -1,6 +1,5 @@
 import * as commander from "commander";
 import * as fs from "fs-extra";
-import { exec } from "child-process-promise";
 import chalk from "chalk";
 
 commander
@@ -13,7 +12,7 @@ const templateDirectory = __dirname;
 
 const currentDirectory = `${process.cwd()}/${name}`;
 
-console.log(chalk.green(`Building project ${name}`));
+console.log(chalk.blue(`Building project ${name}`));
 
 fs.copySync(`${templateDirectory}/templates`, currentDirectory);
 
@@ -27,8 +26,4 @@ const packageJSON = fs.readFileSync(packageJSONPath, {
 
 fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
 
-console.log(chalk.blue("Installing node modules"));
-
-exec(`cd ${name}`)
-  .then(() => exec("npm i"))
-  .catch(({ stderr }) => console.log(chalk.red(stderr)));
+console.log(chalk.green("Project successfully created"));
