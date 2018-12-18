@@ -4,9 +4,10 @@ import chalk from "chalk";
 
 commander
   .option("-n, --new [projectName]", "Project name e.g. [my-app]", "my-app")
+  .option("-w, --web", "Create parcel based project")
   .parse(process.argv);
 
-const { new: name } = commander;
+const { new: name, web } = commander;
 
 const templateDirectory = __dirname;
 
@@ -14,7 +15,10 @@ const currentDirectory = `${process.cwd()}/${name}`;
 
 console.log(chalk.blue(`Building project ${name}`));
 
-fs.copySync(`${templateDirectory}/templates`, currentDirectory);
+fs.copySync(
+  `${templateDirectory}/templates/${web ? "web" : "node"}`,
+  currentDirectory
+);
 
 console.log(chalk.green("Files copied successfully"));
 
