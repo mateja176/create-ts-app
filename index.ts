@@ -10,7 +10,9 @@ commander
   .option("-g, --graphql", "Create graphql-yoga based project")
   .parse(process.argv);
 
-const { new: name, ...options } = commander;
+const { new: name, web, graphql } = commander;
+
+const options = { web, graphql };
 
 const templateDirectory = __dirname;
 
@@ -42,10 +44,12 @@ fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
 
 spawnSync("git", ["init"], { cwd: currentDirectory });
 
-console.log(chalk.blue("📘 Initialized git repository"));
+console.log(chalk.green("📘 Initialized git repository"));
 
 console.log(chalk.blue("⚙ Installing node modules"));
 
 spawnSync("npm", ["install"], { cwd: currentDirectory });
 
 console.log(chalk.green("🚀 Project created successfully"));
+console.log(chalk.bgBlue.black(`cd ${name}`));
+console.log(chalk.bgBlue.black("npm start"));

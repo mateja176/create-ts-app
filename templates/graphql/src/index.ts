@@ -8,7 +8,9 @@ const resolvers = {
 };
 
 const server = new GraphQLServer({
-  typeDefs: fs.readFileSync("./schema.graphql", { encoding: "UTF-8" }),
+  typeDefs: fs.readFileSync(`${__dirname}/schema.graphql`, {
+    encoding: "UTF-8"
+  }),
   resolvers
 });
 

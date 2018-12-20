@@ -8,7 +8,7 @@
     "test:watch": "jest --watch",
     "build": "tsc",
     "lint": "tslint",
-    "run": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
