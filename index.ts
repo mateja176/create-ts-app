@@ -51,5 +51,4 @@ console.log(chalk.blue("⚙ Installing node modules"));
 spawnSync("npm", ["install"], { cwd: currentDirectory });
 
 console.log(chalk.green("🚀 Project created successfully"));
-console.log(chalk.bgBlue.black(`cd ${name}`));
-console.log(chalk.bgBlue.black("npm start"));
+console.log(chalk.bgBlue.black(`cd ${name} && npm start`));
