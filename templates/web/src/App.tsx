@@ -1,16 +1,10 @@
-import * as React, { SFC } from "react";
+import React from "react";
+import "./App.scss";
 
 type AppProps = {};
 
-type AppState = {};
-
-const App = () => (
-  <div>App</div>
-);
+const App = () => <div>App</div>;
 
 export default App;
 
-export {
-  AppProps,
-  AppState
-};
+export { AppProps };
