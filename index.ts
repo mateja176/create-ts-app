@@ -2,7 +2,7 @@ import * as commander from "commander";
 import * as fs from "fs-extra";
 import chalk from "chalk";
 import { spawnSync } from "child_process";
-import { toPairs } from "ramda";
+import { toPairs, find } from "ramda";
 
 commander
   .option("-n, --new [projectName]", "Project name e.g. [my-app]", "my-app")
@@ -21,9 +21,11 @@ const currentDirectory = `${process.cwd()}/${name}`;
 console.log(chalk.blue(`🛠 Building project ${name}`));
 
 const selectProject = (options: { [key: string]: boolean }) => {
-  const [key] = [...toPairs(options), ["node", true]].find(
-    ([_, value]) => !!value
-  );
+  const [key] = find<Array<string | boolean>>(([_, value]) => !!value)([
+    ...toPairs(options),
+    ["node", true]
+  ]);
+
   return key;
 };
 
