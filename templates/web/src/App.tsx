@@ -3,7 +3,12 @@ import "./App.scss";
 
 type AppProps = {};
 
-const App = () => <div>App</div>;
+const App = () => (
+  <div>
+    <div className="rocket">⁌</div>
+    <div className="gun">🔫</div>
+  </div>
+);
 
 export default App;
 
