@@ -19,7 +19,7 @@ const templateDirectory = __dirname;
 
 const currentDirectory = `${process.cwd()}/${name}`;
 
-console.log(chalk.blue(`🛠 Building project ${name}`));
+console.log(chalk.blue(`🛠 Building project '${name}'`));
 
 const selectProject = (options: { [key: string]: boolean }) => {
   const [key] = find<Array<string | boolean>>(([_, value]) => value as boolean)(
@@ -53,6 +53,10 @@ if (install) {
 
   spawnSync("npm", ["install"], { cwd: currentDirectory });
 }
+
+spawnSync("git", ["add", "."], { cwd: currentDirectory });
+
+spawnSync("git", ["commit", "-m", "Initial Commit"], { cwd: currentDirectory });
 
 console.log(chalk.green("🚀 Project created successfully"));
 
