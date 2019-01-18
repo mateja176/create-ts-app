@@ -1,0 +1,38 @@
+:root {
+  --translate: -40px;
+}
+
+body {
+  font-family: Helvetica;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.rocket {
+  display: inline-block;
+  opacity: 0;
+  animation: fly-off 1s infinite ease-in-out;
+}
+
+.gun {
+  font-size: 30px;
+  display: inline-block;
+  transform: translateY(7px);
+}
+
+@keyframes fly-off {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(var(--translate));
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--translate));
+  }
+}

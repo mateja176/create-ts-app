@@ -8,6 +8,7 @@ commander
   .option("-n, --new [projectName]", "Project name e.g. [my-app]", "my-app")
   .option("-w, --web", "Create parcel based project")
   .option("-g, --graphql", "Create graphql-yoga based project")
+  .option("-r, --redux", "Create redux project")
   .option("-i, --install", "Install node modules")
   .parse(process.argv);
 
