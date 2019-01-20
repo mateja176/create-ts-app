@@ -1,3 +1,5 @@
+#!/usr/bin/env ts-node
+
 import * as commander from "commander";
 import * as fs from "fs-extra";
 import chalk from "chalk";
@@ -35,7 +37,7 @@ fs.copySync(
   currentDirectory
 );
 
-console.log(chalk.green("→ Files copied successfully"));
+console.log(chalk.green("🖋 Files copied successfully"));
 
 const packageJSONPath = `${currentDirectory}/package.json`;
 
@@ -47,10 +49,10 @@ fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
 
 spawnSync("git", ["init"], { cwd: currentDirectory });
 
-console.log(chalk.green("📘 Initialized git repository"));
+console.log(chalk.green("📚 Initialized git repository"));
 
 if (install) {
-  console.log(chalk.blue("⚙ Installing node modules"));
+  console.log(chalk.blue("🏗 Installing node modules"));
 
   spawnSync("npm", ["install"], { cwd: currentDirectory });
 }
