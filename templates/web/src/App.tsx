@@ -1,8 +1,6 @@
 import * as React from "react";
 import "./App.scss";
 
-type AppProps = {};
-
 const App = () => (
   <div>
     <div className="rocket">⁌</div>
@@ -11,5 +9,3 @@ const App = () => (
 );
 
 export default App;
-
-export { AppProps };
