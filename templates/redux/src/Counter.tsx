@@ -1,22 +1,33 @@
 import * as React from "react";
-import { connect } from "tls";
+import { connect } from "react-redux";
 import { incrementBy, decrementBy } from "./redux/actions/count";
+import { State } from "./redux/";
 
-type CounterProps = {};
+type dispatchCountAction = () => void;
 
-const Counter = ({ count }) => (
-  <>
+type CounterProps = {
+  count: number;
+  increment: dispatchCountAction;
+  decrement: dispatchCountAction;
+};
+
+const Counter: React.SFC<CounterProps> = ({
+  count,
+  increment,
+  decrement
+}: CounterProps) => (
+  <div>
     <p>Count: {count}</p>
-    <button>+</button>
-    <button>-</button>
-  </>
+    <button onClick={increment}>+</button>
+    <button onClick={decrement}>-</button>
+  </div>
 );
 
-export default connect(
-  ({ count }) => ({ count }),
+export default connect<State>(
+  ({ count }: State) => ({ count }),
   (dispatch: Function) => ({
-    increment: (amount: number) => dispatch(incrementBy(amount)),
-    decrement: (amount: number) => dispatch(decrementBy(amount))
+    increment: () => dispatch(incrementBy(1)),
+    decrement: () => dispatch(decrementBy(1))
   })
 )(Counter);
 
