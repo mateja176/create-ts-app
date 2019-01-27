@@ -7,8 +7,6 @@ type DecrementBy = IncrementBy;
 
 type CountAction = IncrementBy | DecrementBy;
 
-export default CountAction;
-
 const incrementBy = (amount: number) => ({
   type: INCREMENT_BY,
   payload: amount
@@ -19,4 +17,6 @@ const decrementBy = (amount: number) => ({
   payload: amount
 });
 
-export { incrementBy, decrementBy };
+export default CountAction;
+
+export { IncrementBy, incrementBy, DecrementBy, decrementBy };
