@@ -1,24 +1,22 @@
-import { INCREMENT_BY, DECREMENT_BY } from "./types/count";
+import Action from "./";
+import { DECREMENT_BY, INCREMENT_BY } from "./types/count";
 
-interface IncrementBy {
-  type: string;
-  payload: number;
-}
+type IncrementBy = Action<number>;
 
 type DecrementBy = IncrementBy;
+
+type CountAction = IncrementBy | DecrementBy;
+
+export default CountAction;
 
 const incrementBy = (amount: number) => ({
   type: INCREMENT_BY,
   payload: amount
 });
 
-type CountAction = IncrementBy | DecrementBy;
-
 const decrementBy = (amount: number) => ({
   type: DECREMENT_BY,
   payload: amount
 });
-
-export default CountAction;
 
 export { incrementBy, decrementBy };
