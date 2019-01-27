@@ -1,7 +1,7 @@
-import Action from "./";
+import ActionWithPayload from "./";
 import { DECREMENT_BY, INCREMENT_BY } from "./types/count";
 
-type IncrementBy = Action<number>;
+type IncrementBy = ActionWithPayload<number>;
 
 type DecrementBy = IncrementBy;
 

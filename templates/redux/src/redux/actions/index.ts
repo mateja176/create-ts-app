@@ -1,7 +1,11 @@
 import { Action as ReduxAction } from "redux";
 
-interface Action<Payload> extends ReduxAction<string> {
+type Action = ReduxAction<string>;
+
+interface ActionWithPayload<Payload> extends ReduxAction<string> {
   payload: Payload;
 }
 
-export default Action;
+export default ActionWithPayload;
+
+export { Action };
