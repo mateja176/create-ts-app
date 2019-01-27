@@ -1,15 +1,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { incrementBy, decrementBy } from "./redux/actions/count";
 import { State } from "./redux/";
+import {
+  decrementBy,
+  DecrementBy,
+  incrementBy,
+  IncrementBy
+} from "./redux/actions/count";
 
-type dispatchCountAction = () => void;
-
-type CounterProps = {
+interface CounterProps {
   count: number;
-  increment: dispatchCountAction;
-  decrement: dispatchCountAction;
-};
+  increment: () => IncrementBy;
+  decrement: () => DecrementBy;
+}
 
 const Counter: React.SFC<CounterProps> = ({
   count,
@@ -23,9 +26,9 @@ const Counter: React.SFC<CounterProps> = ({
   </div>
 );
 
-export default connect<State>(
+export default connect(
   ({ count }: State) => ({ count }),
-  (dispatch: Function) => ({
+  dispatch => ({
     increment: () => dispatch(incrementBy(1)),
     decrement: () => dispatch(decrementBy(1))
   })
