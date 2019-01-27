@@ -1,9 +1,13 @@
-import { INCREMENT_BY, DECREMENT_BY } from "../actions/types/count";
+import { Reducer } from "redux";
 import CountAction from "../actions/count";
+import { DECREMENT_BY, INCREMENT_BY } from "../actions/types/count";
 
 const initialState = 0;
 
-const count = (state = initialState, { type, payload }: CountAction) => {
+const count: Reducer<number, CountAction> = (
+  state = initialState,
+  { type, payload }
+) => {
   switch (type) {
     case INCREMENT_BY:
       return state + payload;
