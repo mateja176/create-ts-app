@@ -1,10 +1,10 @@
 #!/usr/bin/env ts-node
 
-import * as commander from "commander";
-import * as fs from "fs-extra";
 import chalk from "chalk";
 import { spawnSync } from "child_process";
-import { toPairs, find } from "ramda";
+import * as commander from "commander";
+import * as fs from "fs-extra";
+import { find, toPairs } from "ramda";
 
 commander
   .option("-n, --new [projectName]", "Project name e.g. [my-app]", "my-app")
@@ -46,6 +46,14 @@ const packageJSON = fs.readFileSync(packageJSONPath, {
 });
 
 fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
+
+const packageJSONLockPath = `${currentDirectory}/package-lock.json`;
+
+const packageJSONLock = fs.readFileSync(packageJSONPath, {
+  encoding: "UTF-8"
+});
+
+fs.writeFileSync(packageJSONLockPath, packageJSONLock.replace('"name": "app-name"', `"name": "${name}"`));
 
 spawnSync("git", ["init"], { cwd: currentDirectory });
 
