@@ -10,7 +10,17 @@
   "bin": {
     "create-ts-app": "bin/create-ts-app"
   },
-  "keywords": [],
+  "keywords": [
+    "typescript",
+    "seed",
+    "starter",
+    "project",
+    "react",
+    "redux",
+    "graphql",
+    "node",
+    "ts-node"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
