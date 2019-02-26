@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+"use strict";
+exports.__esModule = true;
+var chalk_1 = require("chalk");
+var child_process_1 = require("child_process");
+var commander = require("commander");
+var fs = require("fs-extra");
+var ramda_1 = require("ramda");
+commander
+    .option("-n, --new [projectName]", "Project name e.g. [my-app]", "my-app")
+    .option("-w, --web", "Create parcel based project")
+    .option("-g, --graphql", "Create graphql-yoga based project")
+    .option("-r, --redux", "Create redux project")
+    .option("-i, --install", "Install node modules")
+    .parse(process.argv);
+var name = commander["new"], web = commander.web, graphql = commander.graphql, install = commander.install;
+var options = { web: web, graphql: graphql, node: true };
+var currentDirectory = process.cwd() + "/" + name;
+console.log(chalk_1["default"].blue("\uD83D\uDEE0 Building project '" + name + "'"));
+var selectProject = ramda_1.pipe(ramda_1.toPairs, ramda_1.find(function (_a) {
+    var _ = _a[0], value = _a[1];
+    return value;
+}), ramda_1.head);
+fs.copySync(__dirname + "/../templates/" + selectProject(options), currentDirectory);
+console.log(chalk_1["default"].green("🖋 Files copied successfully"));
+var packageJSONPath = currentDirectory + "/package.json";
+var packageJSON = fs.readFileSync(packageJSONPath, {
+    encoding: "UTF-8"
+});
+fs.writeFileSync(packageJSONPath, packageJSON.replace("app-name", name));
+child_process_1.spawnSync("git", ["init"], { cwd: currentDirectory });
+console.log(chalk_1["default"].green("📚 Initialized git repository"));
+if (install) {
+    console.log(chalk_1["default"].blue("🏗 Installing node modules"));
+    child_process_1.spawnSync("npm", ["install"], { cwd: currentDirectory });
+}
+child_process_1.spawnSync("git", ["add", "."], { cwd: currentDirectory });
+child_process_1.spawnSync("git", ["commit", "-m", "Initial Commit"], { cwd: currentDirectory });
+console.log(chalk_1["default"].green("🚀 Project created successfully"));
+console.log(chalk_1["default"].bgBlue.black("cd " + name + " && npm start"));
